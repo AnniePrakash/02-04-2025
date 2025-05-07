@@ -1,68 +1,55 @@
 package org.sample;
 
-import java.io.File;
-import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 
-import org.apache.commons.io.FileUtils;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
 
 public class JUnitSample {
 	
-	static WebDriver driver;
-	
-	@BeforeClass
-	public static void tc05() {
-		driver=new ChromeDriver();
-		
-		driver.manage().window().maximize();
-
-	}
-	
-	@AfterClass
-	public static void tc03() {
-		
-		driver.quit();
-	
-
-	}
-	
 	@Test
-	public void tc02() throws InterruptedException {
-		driver.findElement(By.id("email")).sendKeys("Hanno@123");
-		driver.findElement(By.id("pass")).sendKeys("1234568");
+	public void tc01() throws ParseException {
+		//get metho
 		
-		Thread.sleep(3000);
+		//URL---->https://reqres.in/api/users/2
+		
+		Response response = RestAssured.get("https://reqres.in/api/users?page=2");
 
-	}
-
+		//To get the response code
+		
+		int statusCode = response.getStatusCode();
+		
+		System.out.println(statusCode);
+		
+		//To get response body
+		
+		String string = response.getBody().asString();
+		
+		System.out.println(string);
+		
+		//To read JSON file==We need lib called simpleJSON
+		
+		//By using JSONParse class to read
+		
+		JSONParser parser=new JSONParser();
+		
+		Object parse = parser.parse(string);// ParseException
+		
+		//convert Object to JSONObject
+		
+		JSONObject ob=(JSONObject) parse;
+		
+		String string2 = ob.get("total").toString();
+		
+		System.out.println(string2);
 	
-	@Before
-	public void tc04() {
-		driver.get("https://www.facebook.com/");
-
-	}
-	
-	@After
-	public void tc01() throws IOException {
-		TakesScreenshot ts=(TakesScreenshot) driver;
 		
-		File source = ts.getScreenshotAs(OutputType.FILE);
-		
-		File target=new File("C:\\new7pmbatch\\selenium\\java\\junitscreenshot1.png");
-		
-		FileUtils.copyFile(source, target);
-		
-		
-
 	}
 
 }

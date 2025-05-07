@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="12.302" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-04-14T06:11:38.475545500Z">
+<testcase classname="Login Functionalities" name="Checking with invalid datas" time="11.66">
+<system-out><![CDATA[
+Given FaceBook URL Launched.................................................passed
+When User Enter Username and password.......................................passed
+Then Takescreenshot.........................................................passed
+]]></system-out>
+</testcase>
+</testsuite>

@@ -112,24 +112,23 @@ public class BaseClass {
 		return element;
 
 	}
-	
+
 	public static void quit() {
 		driver.quit();
 
 	}
-	
+
 	public static void close() {
 		driver.close();
 
 	}
-	
+
 	public static void screenShot(String file) throws IOException {
-		
-		TakesScreenshot ts=(TakesScreenshot) driver;
+
+		TakesScreenshot ts = (TakesScreenshot) driver;
 		File source = ts.getScreenshotAs(OutputType.FILE);
-		File target=new File(file);
+		File target = new File(file);
 		FileUtils.copyFile(source, target);
-	
 
 	}
 
